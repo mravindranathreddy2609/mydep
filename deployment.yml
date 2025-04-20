@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: my-config
-  namespace: default
+  namespace: dev-env
 data:
   DATABASE_URL: "postgres://user:password@hostname:5432/dbname"
   REDIS_HOST: "redis-server"
