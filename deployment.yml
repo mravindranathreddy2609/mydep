@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: my-config
-  namespace: my-namespace
+  namespace: default
 data:
   DATABASE_URL: "postgres://user:password@hostname:5432/dbname"
   REDIS_HOST: "redis-server"
@@ -15,7 +15,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx-pod1
-  namespace: my-namespace
+  namespace: default
 spec:
   containers:
     - name: nginx
