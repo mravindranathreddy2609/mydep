@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cont-2
-        image: shammu101/dm
+        image: shammu101/cycle
         ports:
         - containerPort: 80
         env:
