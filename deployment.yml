@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: my-config
-  namespace: default
+  namespace: my-namespace
 data:
   DATABASE_URL: "postgres://user:password@hostname:5432/dbname"
   REDIS_HOST: "redis-server"
@@ -15,7 +15,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx-pod1
-  namespace: default
+  namespace: my-namespace
 spec:
   containers:
     - name: nginx
@@ -46,13 +46,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
-  namespace: default
+  namespace: my-namespace
 spec:
   selector:
     app: nginx
   ports:
-    - protocol: TCP
-      port: 80         # Service port
+    - port: 80         # Service port
       targetPort: 80   # Container port
       nodePort: 30080  # External port (must be in range 30000–32767)
   type: NodePort
