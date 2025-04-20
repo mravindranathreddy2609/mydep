@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: nginx:latest # Replace with your actual image if needed
+        image: shammu101/dm # Replace with your actual image if needed
         ports:
         - containerPort: 80
         envFrom:
