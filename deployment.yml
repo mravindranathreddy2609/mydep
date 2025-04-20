@@ -26,31 +26,56 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-app
+      app: dm
   template:
     metadata:
       labels:
-        app: my-app
+        app: dm
     spec:
       containers:
-      - name: my-app
+      - name: dm
         image: shammu101/dm # Replace with your actual image if needed
         ports:
         - containerPort: 80
         envFrom:
         - configMapRef:
             name: my-config
+spec:
+  containers:
+    - name: dm
+      image: shammu101/dm
+      env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: DATABASE_URL
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: REDIS_PORT
+        - name: APP_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: APP_MODE
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-service
+  name: httpd
   namespace: dev-env
 spec:
-  selector:
-    app: my-app
+  type: NodePort
   ports:
-  - protocol: TCP
-    port: 80
+  - port: 80
     targetPort: 80
-  type: ClusterIP
+  selector:
+    app: dm
